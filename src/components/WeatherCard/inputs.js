@@ -3,15 +3,11 @@ import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
+import { DEFAULT_GEOLOCATION } from 'components/WeatherCard/constants'
+
 import { RoundContainer } from 'components/WeatherCard/Elements'
 
-import { get_weather } from 'services/http/openmeteo'
-
-
-const DEFAULT_GEOLOCATION = {
-    latitude: 52.52,
-    longitude: 13.42
-}
+import { weatherService } from 'services/http/openmeteo'
 
 const WeatherCardInputs = () => {
 
@@ -35,7 +31,7 @@ const WeatherCardInputs = () => {
         console.log(`inputLongitude: ${inputLongitude}`)
         console.groupEnd("WeatherCard Submit Input")
 
-        get_weather(inputLatitude, inputLongitude)
+        weatherService.updateWeatherObs(inputLatitude, inputLongitude)
     }
 
     return (

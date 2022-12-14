@@ -8,18 +8,22 @@ import { DEFAULT_GEOLOCATION } from 'components/WeatherCard/constants'
 import { RoundContainer } from 'components/WeatherCard/Elements'
 
 import { weatherService } from 'services/http/openmeteo'
+import { Coordinates } from './WeatherStore';
 
 const WeatherCardInputs = () => {
+    
+    const coordinates = new Coordinates()
+
 
     const [inputLatitude, setLatitude] = useState(DEFAULT_GEOLOCATION.latitude)
     const [inputLongitude, setLongitude] = useState(DEFAULT_GEOLOCATION.longitude)
 
     const latitudeChangeHandler = (event) => {
-        setLatitude(event.target.value);
+      coordinates.setLatitude = event.target.value;
     };
 
     const longitudeChangeHandler = (event) => {
-        setLongitude(event.target.value);
+      coordinates.setLongitude = event.target.value;
     };
 
     const submitHandler = (event) => {
@@ -27,11 +31,12 @@ const WeatherCardInputs = () => {
         event.preventDefault();
 
         console.group("WeatherCard Submit Input")
-        console.log(`inputLatitude: ${inputLatitude}`)
-        console.log(`inputLongitude: ${inputLongitude}`)
+        console.log(coordinates.coordinates)
+        // console.log(`inputLatitude: ${inputLatitude}`)
+        // console.log(`inputLongitude: ${inputLongitude}`)
         console.groupEnd("WeatherCard Submit Input")
 
-        weatherService.updateWeatherObs(inputLatitude, inputLongitude)
+        weatherService.updateWeatherObs(coordinates.latitude, coordinates.longitude)
     }
 
     return (
@@ -43,7 +48,7 @@ const WeatherCardInputs = () => {
                         <Form.Control
                             type="number"
                             placeholder={DEFAULT_GEOLOCATION.latitude}
-                            value={inputLatitude}
+                            value={coordinates.latitude}
                             onChange={latitudeChangeHandler}
                         />
                     </Form.Group>
@@ -52,7 +57,7 @@ const WeatherCardInputs = () => {
                         <Form.Control
                             type="number"
                             placeholder={DEFAULT_GEOLOCATION.longitude}
-                            value={inputLongitude}
+                            value={coordinates.longitude}
                             onChange={longitudeChangeHandler}
                         />
                     </Form.Group>

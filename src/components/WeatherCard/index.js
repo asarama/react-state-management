@@ -5,7 +5,6 @@ import WeatherCardInputs from 'components/WeatherCard/inputs';
 import { RoundContainer } from 'components/WeatherCard/Elements'
 
 const WeatherCard = () => {
-
     return (
         <>
             <RoundContainer>

@@ -5,6 +5,8 @@ import Button from 'react-bootstrap/Button';
 
 import { RoundContainer } from 'components/WeatherCard/Elements'
 
+import { get_weather } from 'services/http/openmeteo'
+
 
 const DEFAULT_GEOLOCATION = {
     latitude: 52.52,
@@ -32,6 +34,8 @@ const WeatherCardInputs = () => {
         console.log(`inputLatitude: ${inputLatitude}`)
         console.log(`inputLongitude: ${inputLongitude}`)
         console.groupEnd("WeatherCard Submit Input")
+
+        get_weather(inputLatitude, inputLongitude)
     }
 
     return (

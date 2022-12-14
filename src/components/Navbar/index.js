@@ -3,7 +3,7 @@ import {
   Nav,
   NavLink,
   NavMenu,
-} from './NavbarElements';
+} from './Elements';
   
 const Navbar = () => {
   return (

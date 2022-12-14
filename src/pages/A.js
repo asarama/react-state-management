@@ -1,5 +1,7 @@
 
 import React from 'react';
+
+import WeatherCard from 'components/WeatherCard';
   
 const A = () => {
   return (
@@ -12,6 +14,7 @@ const A = () => {
       }}
     >
       <h1>Page A</h1>
+      <WeatherCard></WeatherCard>
     </div>
   );
 };

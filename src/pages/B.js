@@ -1,5 +1,7 @@
 
 import React from 'react';
+
+import WeatherCard from 'components/WeatherCard';
   
 const B = () => {
   return (
@@ -11,7 +13,7 @@ const B = () => {
         height: '90vh'
       }}
     >
-      <h1>Page B</h1>
+      <WeatherCard></WeatherCard>
     </div>
   );
 };

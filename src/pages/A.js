@@ -13,7 +13,7 @@ const A = () => {
         height: '90vh'
       }}
     >
-      <h1>Page A</h1>
+      <WeatherCard></WeatherCard>
       <WeatherCard></WeatherCard>
     </div>
   );

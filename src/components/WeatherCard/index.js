@@ -1,13 +1,17 @@
 import React from 'react';
 
+import WeatherCardDisplay from 'components/WeatherCard/display';
 import WeatherCardInputs from 'components/WeatherCard/inputs';
+import { RoundContainer } from 'components/WeatherCard/Elements'
 
 const WeatherCard = () => {
 
     return (
         <>
-            {/* Need to display result */}
-            <WeatherCardInputs></WeatherCardInputs>
+            <RoundContainer>
+                <WeatherCardDisplay></WeatherCardDisplay>
+                <WeatherCardInputs></WeatherCardInputs>
+            </RoundContainer>
         </>
     );
 };

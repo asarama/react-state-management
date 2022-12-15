@@ -1,25 +1,30 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-import { RoundContainer } from 'components/WeatherCardClone/Elements'
+import { RoundContainer } from 'components/WeatherCard/Elements'
 
 import { weatherService } from 'services/http/openmeteo'
 
-import { LatitudeInputContext, LongitudeInputContext } from 'components/context'
+import { 
+    useGeolocationInput, 
+    useGeolocationLatitudeUpdate, 
+    useGeolocationLongitudeUpdate 
+} from 'context/input'
 
 const WeatherCardInputs = () => {
 
-    const [inputLatitude, setLatitude] = useState()
-    const [inputLongitude, setLongitude] = useState()
+    const geolocationInputs = useGeolocationInput()
+    const updateLatitude = useGeolocationLatitudeUpdate()
+    const updateLongitude = useGeolocationLongitudeUpdate()
 
     const latitudeChangeHandler = (event) => {
-        setLatitude(event.target.value);
+        updateLatitude(event.target.value)
     };
 
     const longitudeChangeHandler = (event) => {
-        setLongitude(event.target.value);
+        updateLongitude(event.target.value)
     };
 
     const submitHandler = (event) => {
@@ -27,11 +32,11 @@ const WeatherCardInputs = () => {
         event.preventDefault();
 
         console.group("WeatherCard Submit Input")
-        console.log(`inputLatitude: ${inputLatitude}`)
-        console.log(`inputLongitude: ${inputLongitude}`)
+        console.log(`inputLatitude: ${geolocationInputs.latitude}`)
+        console.log(`inputLongitude: ${geolocationInputs.longitude}`)
         console.groupEnd("WeatherCard Submit Input")
 
-        weatherService.updateWeatherObs(inputLatitude, inputLongitude)
+        weatherService.updateWeatherObs(geolocationInputs.latitude, geolocationInputs.longitude)
     }
 
     return (
@@ -40,25 +45,21 @@ const WeatherCardInputs = () => {
                 <Form onSubmit={submitHandler}>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                         <Form.Label>Latitude</Form.Label>
-                        <LatitudeInputContext.Provider value={inputLatitude}>
-                            <Form.Control
-                                type="number"
-                                // placeholder={DEFAULT_GEOLOCATION.latitude}
-                                value={inputLatitude}
-                                onChange={latitudeChangeHandler}
-                            />
-                        </LatitudeInputContext.Provider>
+                        <Form.Control
+                            type="number"
+                            // placeholder={DEFAULT_GEOLOCATION.latitude}
+                            value={geolocationInputs.latitude}
+                            onChange={latitudeChangeHandler}
+                        />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
                         <Form.Label>Longitude</Form.Label>
-                        <LongitudeInputContext.Provider value={inputLongitude}>
-                            <Form.Control
-                                type="number"
-                                // placeholder={DEFAULT_GEOLOCATION.longitude}
-                                value={inputLongitude}
-                                onChange={longitudeChangeHandler}
-                            />
-                        </LongitudeInputContext.Provider>
+                        <Form.Control
+                            type="number"
+                            // placeholder={DEFAULT_GEOLOCATION.longitude}
+                            value={geolocationInputs.longitude}
+                            onChange={longitudeChangeHandler}
+                        />
                     </Form.Group>
                     <Button variant="primary" type="submit">
                         Submit

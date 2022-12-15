@@ -4,6 +4,8 @@ import React from 'react';
 import WeatherCard from 'components/WeatherCard';
 import WeatherCardClone from 'components/WeatherCardClone';
 
+import {GeolocationInputProvider} from 'context/input';
+
 const A = () => {
   return (
     <div
@@ -14,8 +16,10 @@ const A = () => {
         height: '90vh'
       }}
     >
-      <WeatherCard></WeatherCard>
-      <WeatherCardClone></WeatherCardClone>
+      <GeolocationInputProvider>
+        <WeatherCard></WeatherCard>
+        <WeatherCardClone></WeatherCardClone>
+      </GeolocationInputProvider>
     </div>
   );
 };

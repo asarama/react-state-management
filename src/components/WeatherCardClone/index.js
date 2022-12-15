@@ -4,7 +4,7 @@ import WeatherCardDisplay from 'components/WeatherCardClone/display';
 import WeatherCardInputs from 'components/WeatherCardClone/inputs';
 import { RoundContainer } from 'components/WeatherCardClone/Elements'
 
-const WeatherCard = () => {
+const WeatherCardClone = () => {
 
     return (
         <>
@@ -16,4 +16,4 @@ const WeatherCard = () => {
     );
 };
 
-export default WeatherCard;
+export default WeatherCardClone;

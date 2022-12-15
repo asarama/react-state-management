@@ -2,7 +2,7 @@
 import React from 'react';
 
 import WeatherCard from 'components/WeatherCard';
-import WeatherCardClone from 'components/WeatherCard';
+import WeatherCardClone from 'components/WeatherCardClone';
   
 const A = () => {
   return (

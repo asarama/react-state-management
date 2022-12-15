@@ -7,19 +7,21 @@ import { DEFAULT_GEOLOCATION } from 'components/WeatherCard/constants'
 
 import { RoundContainer } from 'components/WeatherCard/Elements'
 
-import { weatherService } from 'services/http/openmeteo'
-
+import { useWeatherState, weatherService } from './weather_state';
+import { useWeatherInputState } from './weather_input_state'
 const WeatherCardInputs = () => {
 
-    const [inputLatitude, setLatitude] = useState(DEFAULT_GEOLOCATION.latitude)
-    const [inputLongitude, setLongitude] = useState(DEFAULT_GEOLOCATION.longitude)
+    const weather_state = useWeatherState()
+    const weather_input_state = useWeatherInputState()
+    // const [inputLatitude, setLatitude] = useState(DEFAULT_GEOLOCATION.latitude)
+    // const [inputLongitude, setLongitude] = useState(DEFAULT_GEOLOCATION.longitude)
 
     const latitudeChangeHandler = (event) => {
-        setLatitude(event.target.value);
+        weather_input_state.latitude.set(event.target.value)
     };
 
     const longitudeChangeHandler = (event) => {
-        setLongitude(event.target.value);
+        weather_input_state.longitude.set(event.target.value);
     };
 
     const submitHandler = (event) => {
@@ -27,11 +29,10 @@ const WeatherCardInputs = () => {
         event.preventDefault();
 
         console.group("WeatherCard Submit Input")
-        console.log(`inputLatitude: ${inputLatitude}`)
-        console.log(`inputLongitude: ${inputLongitude}`)
+        console.log(`inputLatitude: ${weather_input_state.latitude.get()}`)
+        console.log(`inputLongitude: ${weather_input_state.longitude.get()}`)
         console.groupEnd("WeatherCard Submit Input")
-
-        weatherService.updateWeatherObs(inputLatitude, inputLongitude)
+        weatherService.updateWeatherObs(weather_input_state.latitude.get(), weather_input_state.longitude.get())
     }
 
     return (
@@ -43,7 +44,7 @@ const WeatherCardInputs = () => {
                         <Form.Control
                             type="number"
                             placeholder={DEFAULT_GEOLOCATION.latitude}
-                            value={inputLatitude}
+                            value={weather_input_state.latitude.get()}
                             onChange={latitudeChangeHandler}
                         />
                     </Form.Group>
@@ -52,7 +53,7 @@ const WeatherCardInputs = () => {
                         <Form.Control
                             type="number"
                             placeholder={DEFAULT_GEOLOCATION.longitude}
-                            value={inputLongitude}
+                            value={weather_input_state.longitude.get()}
                             onChange={longitudeChangeHandler}
                         />
                     </Form.Group>

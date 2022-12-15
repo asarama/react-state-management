@@ -1,6 +1,6 @@
 import { BehaviorSubject } from 'rxjs';
-
-const getWeather = async (longitude, latitude) => {
+import { weather_state } from 'components/WeatherCard/weather_state';
+export const getWeather = async (longitude, latitude) => {
     const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`)
     return await response.json()
 }
@@ -11,12 +11,3 @@ const getWeatherSubject = new BehaviorSubject({
             windspeed: "No data"
         }
     })
-
-export const weatherService = {
-    updateWeatherObs: async (longitude, latitude) => {
-        getWeatherSubject.next(await getWeather(longitude, latitude))
-    },
-    getWeatherObs$: () => {
-        return getWeatherSubject.asObservable()
-    }
-}

@@ -7,8 +7,7 @@ import { DEFAULT_GEOLOCATION } from 'components/WeatherCardClone/constants'
 
 import { RoundContainer } from 'components/WeatherCardClone/Elements'
 
-import { weatherService } from 'services/http/openmeteo'
-
+import { weatherService } from "../WeatherCard/weather_state"
 const WeatherCardInputs = () => {
 
     const [inputLatitude, setLatitude] = useState(DEFAULT_GEOLOCATION.latitude)

@@ -2,42 +2,35 @@ import React, { useState, useEffect } from 'react';
 
 import { RoundContainer } from 'components/WeatherCard/Elements'
 
-import { weatherService } from 'services/http/openmeteo'
+import { useWeatherState } from './weather_state';
 
 const WeatherCardDisplay = () => {
 
-    const [queriedTemperature, setTemperature] = useState('No data')
-    const [queriedWindspeed, setWindspeed] = useState('No data')
+    const weather_state = useWeatherState()
 
-    useEffect(() => {
-
-        const weatherServiceSub = weatherService.getWeatherObs$().subscribe({
-            next: data=> {
-                setTemperature(data.current_weather.temperature)
-                setWindspeed(data.current_weather.windspeed)
-            },
-            error: error => console.error(error)
-        })
-
-        // On unmount unsubscribe
-        return () => {
-            weatherServiceSub.unsubscribe()
-        }
-    }, [])
+    if (weather_state.promised) {
+        return <p>Loading ...</p>;
+    }
+    
+    if (weather_state.error) {
+        return <p>Failed to load <br />
+            <code style={{ color: 'red' }}>{weather_state.error.toString()}</code><br />
+        </p>
+    }
 
     return (
         <>
             <RoundContainer>
                 OG
                 <div>
-                    Temperature: {queriedTemperature}
+                    Temperature: {weather_state.temperature.get()}
                 </div>
                 <div>
-                    Windspeed: {queriedWindspeed}
+                    Windspeed: {weather_state.windspeed.get()}
                 </div>
             </RoundContainer>
         </>
     );
 };
 
-export default WeatherCardDisplay;
+export default WeatherCardDisplay

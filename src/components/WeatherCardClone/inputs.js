@@ -3,16 +3,16 @@ import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-import { DEFAULT_GEOLOCATION } from 'components/WeatherCardClone/constants'
-
 import { RoundContainer } from 'components/WeatherCardClone/Elements'
 
 import { weatherService } from 'services/http/openmeteo'
 
+import { LatitudeInputContext, LongitudeInputContext } from 'components/context'
+
 const WeatherCardInputs = () => {
 
-    const [inputLatitude, setLatitude] = useState(DEFAULT_GEOLOCATION.latitude)
-    const [inputLongitude, setLongitude] = useState(DEFAULT_GEOLOCATION.longitude)
+    const [inputLatitude, setLatitude] = useState()
+    const [inputLongitude, setLongitude] = useState()
 
     const latitudeChangeHandler = (event) => {
         setLatitude(event.target.value);
@@ -40,21 +40,25 @@ const WeatherCardInputs = () => {
                 <Form onSubmit={submitHandler}>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                         <Form.Label>Latitude</Form.Label>
-                        <Form.Control
-                            type="number"
-                            placeholder={DEFAULT_GEOLOCATION.latitude}
-                            value={inputLatitude}
-                            onChange={latitudeChangeHandler}
-                        />
+                        <LatitudeInputContext.Provider value={inputLatitude}>
+                            <Form.Control
+                                type="number"
+                                // placeholder={DEFAULT_GEOLOCATION.latitude}
+                                value={inputLatitude}
+                                onChange={latitudeChangeHandler}
+                            />
+                        </LatitudeInputContext.Provider>
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
                         <Form.Label>Longitude</Form.Label>
-                        <Form.Control
-                            type="number"
-                            placeholder={DEFAULT_GEOLOCATION.longitude}
-                            value={inputLongitude}
-                            onChange={longitudeChangeHandler}
-                        />
+                        <LongitudeInputContext.Provider value={inputLongitude}>
+                            <Form.Control
+                                type="number"
+                                // placeholder={DEFAULT_GEOLOCATION.longitude}
+                                value={inputLongitude}
+                                onChange={longitudeChangeHandler}
+                            />
+                        </LongitudeInputContext.Provider>
                     </Form.Group>
                     <Button variant="primary" type="submit">
                         Submit

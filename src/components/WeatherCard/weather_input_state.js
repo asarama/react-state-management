@@ -1,6 +1,7 @@
 import { hookstate, useHookstate } from '@hookstate/core';
+import { validation } from "@hookstate/validation"
 import { DEFAULT_GEOLOCATION } from './constants';
-const weather_input_state = hookstate(DEFAULT_GEOLOCATION)
+const weather_input_state = hookstate(DEFAULT_GEOLOCATION, validation())
 
 export function useWeatherInputState() {
     // This function exposes the state directly.
@@ -13,6 +14,7 @@ export function useWeatherInputState() {
     return useHookstate(weather_input_state)
 }
 
+weather_input_state.validate(inputs => inputs.longitude.length > 0 && inputs.latitude.length > 0, "CANNOT BE EMPTY")
 // for example purposes, let's update the state outside of a React component
 // setTimeout(() => state[state.length].set({
 //     id: '100',

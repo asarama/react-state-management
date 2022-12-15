@@ -39,6 +39,7 @@ const WeatherCardInputs = () => {
         <>
             <RoundContainer>
                 <Form onSubmit={submitHandler}>
+                    <p> ERRORS {JSON.stringify(weather_input_state.errors())} </p>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                         <Form.Label>Latitude</Form.Label>
                         <Form.Control

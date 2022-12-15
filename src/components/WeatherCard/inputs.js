@@ -6,12 +6,13 @@ import Button from 'react-bootstrap/Button';
 import { DEFAULT_GEOLOCATION } from 'components/WeatherCard/constants'
 
 import { RoundContainer } from 'components/WeatherCard/Elements'
-
+import { useHookstate } from '@hookstate/core';
+import {localstored} from '@hookstate/localstored'
 import { useWeatherState, weatherService } from './weather_state';
 import { useWeatherInputState } from './weather_input_state'
 const WeatherCardInputs = () => {
 
-    const weather_state = useWeatherState()
+    const local_TEST = useHookstate(0, localstored({key: 'state-key'}))
     const weather_input_state = useWeatherInputState()
     // const [inputLatitude, setLatitude] = useState(DEFAULT_GEOLOCATION.latitude)
     // const [inputLongitude, setLongitude] = useState(DEFAULT_GEOLOCATION.longitude)
@@ -27,7 +28,7 @@ const WeatherCardInputs = () => {
     const submitHandler = (event) => {
 
         event.preventDefault();
-
+        local_TEST.set(p => p + 1)
         console.group("WeatherCard Submit Input")
         console.log(`inputLatitude: ${weather_input_state.latitude.get()}`)
         console.log(`inputLongitude: ${weather_input_state.longitude.get()}`)

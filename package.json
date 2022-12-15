@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@hookstate/core": "^4.0.0-rc21",
+    "@hookstate/localstored": "^4.0.0-rc21",
     "@hookstate/validation": "^4.0.0-rc21",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",

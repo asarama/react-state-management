@@ -18,7 +18,9 @@ const WeatherCardInputs = () => {
     // const [inputLongitude, setLongitude] = useState(DEFAULT_GEOLOCATION.longitude)
 
     const latitudeChangeHandler = (event) => {
+        console.log(weather_input_state.latitude.value)
         weather_input_state.latitude.set(event.target.value)
+        console.log(weather_input_state.latitude.value)
     };
 
     const longitudeChangeHandler = (event) => {

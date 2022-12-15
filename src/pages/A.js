@@ -2,6 +2,7 @@
 import React from 'react';
 
 import WeatherCard from 'components/WeatherCard';
+import WeatherCardClone from 'components/WeatherCard';
   
 const A = () => {
   return (
@@ -14,7 +15,7 @@ const A = () => {
       }}
     >
       <WeatherCard></WeatherCard>
-      <WeatherCard></WeatherCard>
+      <WeatherCardClone></WeatherCardClone>
     </div>
   );
 };
